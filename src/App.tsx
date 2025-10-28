@@ -21,6 +21,7 @@ import { AdministrationView } from './components/AdministrationView';
 import { GovernanceView } from './components/GovernanceView';
 import { AboutView } from './components/AboutView';
 import { VisualizationShowcase } from './components/VisualizationShowcase';
+import { SheetsShowcase } from './components/SheetsShowcase';
 
 export type ViewType = 
   // Core Logistics
@@ -46,7 +47,8 @@ export type ViewType =
   | 'governance'
   | 'about'
   // Special
-  | 'showcase';
+  | 'showcase'
+  | 'sheets-showcase';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
@@ -76,6 +78,7 @@ function AppContent() {
           {currentView === 'governance' && <GovernanceView />}
           {currentView === 'about' && <AboutView />}
           {currentView === 'showcase' && <VisualizationShowcase />}
+          {currentView === 'sheets-showcase' && <SheetsShowcase />}
       </main>
     </div>
   );

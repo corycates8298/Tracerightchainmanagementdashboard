@@ -19,7 +19,8 @@ import {
   Info,
   ChevronDown,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  FileSpreadsheet
 } from 'lucide-react';
 import { ViewType } from '../App';
 import { useState } from 'react';
@@ -94,6 +95,7 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
       title: 'SHOWCASE',
       items: [
         { id: 'showcase', label: '✨ Next-Gen Features', icon: Sparkles },
+        { id: 'sheets-showcase', label: '📊 Google Sheets Demo', icon: FileSpreadsheet },
       ],
     },
   ];
