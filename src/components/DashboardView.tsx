@@ -16,7 +16,9 @@ import {
   FileText,
   Brain,
   Table2,
-  LayoutTemplate
+  LayoutTemplate,
+  Eye,
+  Camera
 } from 'lucide-react';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
@@ -24,10 +26,13 @@ import { Button } from './ui/button';
 import { ThemeCustomizer } from './ThemeCustomizer';
 import { DashboardBuilder } from './DashboardBuilder';
 import { AIAnalysisPanel } from './AIAnalysisPanel';
+import { AIVisionPanel } from './AIVisionPanel';
 import { CollaborationPanel } from './CollaborationPanel';
 import { DataCleaningTools } from './DataCleaningTools';
 import { PivotTableBuilder } from './PivotTableBuilder';
 import { TemplateLibrary } from './TemplateLibrary';
+import { Dashboard3D } from './Dashboard3D';
+import { DashboardCyberpunk } from './DashboardCyberpunk';
 import { useTheme } from './ThemeContext';
 import { WidgetConfig, WIDGET_COMPONENTS } from './WidgetLibrary';
 import {
@@ -111,9 +116,12 @@ const recentActivities = [
 
 export function DashboardView() {
   const [layout, setLayout] = useState<LayoutType>('analyst');
+  const [view3D, setView3D] = useState(false);
+  const [viewCyberpunk, setViewCyberpunk] = useState(false);
   const [customizerOpen, setCustomizerOpen] = useState(false);
   const [builderOpen, setBuilderOpen] = useState(false);
   const [aiAnalysisOpen, setAIAnalysisOpen] = useState(false);
+  const [aiVisionOpen, setAIVisionOpen] = useState(false);
   const [collaborationOpen, setCollaborationOpen] = useState(false);
   const [dataCleaningOpen, setDataCleaningOpen] = useState(false);
   const [pivotBuilderOpen, setPivotBuilderOpen] = useState(false);
@@ -148,6 +156,58 @@ export function DashboardView() {
 
   const primaryColors = getPrimaryColors();
 
+  // Show Cyberpunk Dashboard if enabled
+  if (viewCyberpunk) {
+    return (
+      <>
+        <DashboardCyberpunk />
+        <Button
+          onClick={() => setViewCyberpunk(false)}
+          className="fixed bottom-8 right-8 shadow-2xl bg-black border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black"
+        >
+          <Eye className="w-5 h-5 mr-2" />
+          Exit Cyberpunk Mode
+        </Button>
+        
+        {/* Panels still accessible in Cyberpunk mode */}
+        <AIAnalysisPanel isOpen={aiAnalysisOpen} onClose={() => setAIAnalysisOpen(false)} />
+        <AIVisionPanel isOpen={aiVisionOpen} onClose={() => setAIVisionOpen(false)} />
+        <CollaborationPanel isOpen={collaborationOpen} onClose={() => setCollaborationOpen(false)} />
+        <DataCleaningTools isOpen={dataCleaningOpen} onClose={() => setDataCleaningOpen(false)} />
+        <PivotTableBuilder isOpen={pivotBuilderOpen} onClose={() => setPivotBuilderOpen(false)} />
+        <TemplateLibrary isOpen={templateLibraryOpen} onClose={() => setTemplateLibraryOpen(false)} onApplyTemplate={(templateId) => console.log('Applying template:', templateId)} />
+        <ThemeCustomizer isOpen={customizerOpen} onClose={() => setCustomizerOpen(false)} />
+      </>
+    );
+  }
+
+  // Show 3D Dashboard if enabled
+  if (view3D) {
+    return (
+      <>
+        <Dashboard3D />
+        <Button
+          onClick={() => setView3D(false)}
+          className="fixed bottom-8 right-8 shadow-2xl text-white"
+          style={{ background: gradientStyleValue }}
+          size="lg"
+        >
+          <Eye className="w-5 h-5 mr-2" />
+          Switch to 2D View
+        </Button>
+        
+        {/* Panels still accessible in 3D mode */}
+        <AIAnalysisPanel isOpen={aiAnalysisOpen} onClose={() => setAIAnalysisOpen(false)} />
+        <AIVisionPanel isOpen={aiVisionOpen} onClose={() => setAIVisionOpen(false)} />
+        <CollaborationPanel isOpen={collaborationOpen} onClose={() => setCollaborationOpen(false)} />
+        <DataCleaningTools isOpen={dataCleaningOpen} onClose={() => setDataCleaningOpen(false)} />
+        <PivotTableBuilder isOpen={pivotBuilderOpen} onClose={() => setPivotBuilderOpen(false)} />
+        <TemplateLibrary isOpen={templateLibraryOpen} onClose={() => setTemplateLibraryOpen(false)} onApplyTemplate={(templateId) => console.log('Applying template:', templateId)} />
+        <ThemeCustomizer isOpen={customizerOpen} onClose={() => setCustomizerOpen(false)} />
+      </>
+    );
+  }
+
   return (
     <div className={`p-8 space-y-6 ${fontClass}`}>
       {/* Header with Layout Switcher */}
@@ -181,6 +241,30 @@ export function DashboardView() {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
+            <Button
+              onClick={() => setView3D(true)}
+              variant="outline"
+              className="text-violet-600 border-violet-200 hover:bg-violet-50"
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              3D View
+            </Button>
+            <Button
+              onClick={() => setViewCyberpunk(true)}
+              variant="outline"
+              className="text-cyan-600 border-cyan-200 hover:bg-cyan-50"
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              Cyberpunk
+            </Button>
+            <Button
+              onClick={() => setAIVisionOpen(true)}
+              variant="outline"
+              className="text-blue-600 border-blue-200 hover:bg-blue-50"
+            >
+              <Brain className="w-4 h-4 mr-2" />
+              AI Vision
+            </Button>
             <Button
               onClick={() => setAIAnalysisOpen(true)}
               variant="outline"
@@ -691,6 +775,12 @@ export function DashboardView() {
         onClose={() => setBuilderOpen(false)}
         widgets={customWidgets}
         onWidgetsChange={handleWidgetsChange}
+      />
+
+      {/* AI Vision Panel */}
+      <AIVisionPanel 
+        isOpen={aiVisionOpen} 
+        onClose={() => setAIVisionOpen(false)} 
       />
 
       {/* AI Analysis Panel */}

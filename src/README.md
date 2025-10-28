@@ -1,11 +1,36 @@
-# TraceRight - AI-Powered Supply Chain Management Platform
+# TraceRight 2.0 - Next-Generation AI Supply Chain Platform
 
-> **Latest Update**: Dashboard Widgets & Background Customization System (October 2025)
+> **Latest Update**: 🚀 Version 2.0 - AI Vision, 3D Visualizations & Advanced Analytics (October 2025)
 
-## 🚀 What's New
+## 🚀 What's New in Version 2.0
+
+### 🎯 Revolutionary Features
+
+#### 🤖 AI Vision Analysis
+- **Image Recognition**: Automatic barcode & QR code scanning
+- **OCR Text Extraction**: PO numbers, dates, addresses, product info
+- **Object Counting**: Pallets, boxes, units with AI precision
+- **Damage Detection**: Severity assessment with recommendations
+- **Compliance Verification**: Hazmat symbols, safety markings
+- **Confidence Scoring**: Know how certain the AI is
+
+#### 🌌 3D Futuristic Dashboard
+- **3D Visualizations**: Rotating glassmorphic metrics display
+- **Real-Time Animation**: Smooth 60fps performance monitoring
+- **Multi-Metric View**: Resource utilization, budget, project completion
+- **Starfield Background**: Immersive space-age interface
+- **Interactive Rings**: Hover and explore data in 3D space
+
+#### 📊 Google Sheets-Inspired Analytics
+- **15+ Advanced Charts**: Waterfall, Treemap, Scatter, Radar, Funnel, Heatmap, Gauge, Bullet, and more
+- **AI Data Analysis**: Natural language queries for instant insights
+- **Pivot Table Builder**: Dynamic tables that scale with your data
+- **Data Cleaning Tools**: AI-powered duplicate detection, outlier identification
+- **Real-Time Collaboration**: Comments, activity feed, team management
+- **Template Library**: 9 professional dashboard templates
 
 ### Dashboard Customization Suite
-TraceRight now features a comprehensive customization system that puts you in complete control:
+TraceRight features a comprehensive customization system:
 
 #### 🎨 Background Customization
 - **4 Background Modes**: None, Solid Color, Gradient, Pattern

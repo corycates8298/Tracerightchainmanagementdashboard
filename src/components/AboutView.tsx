@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { Search, Brain, TrendingUp, Shield, Zap, Package, BarChart3 } from 'lucide-react';
+import { Search, Brain, TrendingUp, Shield, Zap, Package, BarChart3, Sparkles } from 'lucide-react';
 import { AdvancedChartsShowcase } from './AdvancedChartsShowcase';
 
 export function AboutView() {
@@ -26,15 +26,21 @@ export function AboutView() {
         </div>
       </div>
 
-      <Card className="p-8 border-slate-200">
-        <h2 className="text-slate-900 text-2xl mb-4">About TraceRight</h2>
+      <Card className="p-8 border-slate-200 bg-gradient-to-br from-violet-50 to-purple-50">
+        <h2 className="text-slate-900 text-2xl mb-4">About TraceRight 2.0</h2>
         <p className="text-slate-700 mb-4">
-          TraceRight is a comprehensive AI-powered supply chain management platform that provides end-to-end visibility,
-          intelligent insights, and predictive analytics for modern logistics operations.
+          TraceRight 2.0 is the next-generation AI-powered supply chain intelligence platform. Combining computer vision,
+          3D visualizations, and advanced analytics, it provides unprecedented visibility and insights into your entire
+          supply chain ecosystem.
+        </p>
+        <p className="text-slate-700 mb-4">
+          With revolutionary AI Vision capabilities, analyze shipments through photos, detect damage, verify compliance,
+          and extract data automatically. Experience your data in stunning 3D visualizations inspired by futuristic
+          command centers.
         </p>
         <p className="text-slate-700">
-          Built with cutting-edge AI and machine learning capabilities, TraceRight transforms complex supply chain data
-          into actionable intelligence, helping organizations optimize operations, reduce costs, and improve efficiency.
+          Built with cutting-edge AI, machine learning, and modern web technologies, TraceRight 2.0 transforms complex
+          supply chain operations into beautiful, actionable intelligence.
         </p>
       </Card>
 
@@ -82,10 +88,20 @@ export function AboutView() {
 
       <Card className="p-6 border-slate-200 bg-gradient-to-br from-slate-50 to-violet-50">
         <div className="text-center">
-          <Badge className="bg-gradient-to-r from-violet-500 to-purple-600 text-white border-0 mb-4">
-            <Zap className="w-3 h-3 mr-1" />
-            Version 2.0.0
-          </Badge>
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Badge className="bg-gradient-to-r from-violet-500 to-purple-600 text-white border-0">
+              <Zap className="w-3 h-3 mr-1" />
+              Version 2.0.0
+            </Badge>
+            <Badge className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0">
+              <Sparkles className="w-3 h-3 mr-1" />
+              AI Vision
+            </Badge>
+            <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0">
+              <BarChart3 className="w-3 h-3 mr-1" />
+              3D Dashboard
+            </Badge>
+          </div>
           <h3 className="text-slate-900 mb-2">Technology Stack</h3>
           <p className="text-sm text-slate-600 mb-4">
             Built with Firebase, BigQuery, Vertex AI, and Genkit for enterprise-grade performance and scalability.
