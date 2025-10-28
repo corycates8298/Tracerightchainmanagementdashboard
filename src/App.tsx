@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Toaster } from './components/ui/sonner';
 import { ThemeProvider, useTheme } from './components/ThemeContext';
+import { FeatureFlagsProvider } from './components/FeatureFlagsContext';
 import { Navigation } from './components/Navigation';
 import { DashboardView } from './components/DashboardView';
 import { LogisticsView } from './components/LogisticsView';
@@ -22,6 +23,7 @@ import { GovernanceView } from './components/GovernanceView';
 import { AboutView } from './components/AboutView';
 import { VisualizationShowcase } from './components/VisualizationShowcase';
 import { SheetsShowcase } from './components/SheetsShowcase';
+import { FeatureFlagsManager } from './components/FeatureFlagsManager';
 
 export type ViewType = 
   // Core Logistics
@@ -48,7 +50,8 @@ export type ViewType =
   | 'about'
   // Special
   | 'showcase'
-  | 'sheets-showcase';
+  | 'sheets-showcase'
+  | 'feature-flags';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
@@ -79,6 +82,7 @@ function AppContent() {
           {currentView === 'about' && <AboutView />}
           {currentView === 'showcase' && <VisualizationShowcase />}
           {currentView === 'sheets-showcase' && <SheetsShowcase />}
+          {currentView === 'feature-flags' && <FeatureFlagsManager />}
       </main>
     </div>
   );
@@ -86,9 +90,11 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <AppContent />
-      <Toaster />
-    </ThemeProvider>
+    <FeatureFlagsProvider>
+      <ThemeProvider>
+        <AppContent />
+        <Toaster />
+      </ThemeProvider>
+    </FeatureFlagsProvider>
   );
 }

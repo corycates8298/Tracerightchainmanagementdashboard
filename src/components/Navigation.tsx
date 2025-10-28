@@ -20,7 +20,8 @@ import {
   ChevronDown,
   ChevronRight,
   Sparkles,
-  FileSpreadsheet
+  FileSpreadsheet,
+  ToggleLeft
 } from 'lucide-react';
 import { ViewType } from '../App';
 import { useState } from 'react';
@@ -96,6 +97,12 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
       items: [
         { id: 'showcase', label: '✨ Next-Gen Features', icon: Sparkles },
         { id: 'sheets-showcase', label: '📊 Google Sheets Demo', icon: FileSpreadsheet },
+      ],
+    },
+    {
+      title: 'CONFIGURATION',
+      items: [
+        { id: 'feature-flags', label: '🎛️ Feature Flags', icon: ToggleLeft },
       ],
     },
   ];
