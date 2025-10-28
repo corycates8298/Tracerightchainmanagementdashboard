@@ -20,6 +20,7 @@ import { MLIntelligenceView } from './components/MLIntelligenceView';
 import { AdministrationView } from './components/AdministrationView';
 import { GovernanceView } from './components/GovernanceView';
 import { AboutView } from './components/AboutView';
+import { VisualizationShowcase } from './components/VisualizationShowcase';
 
 export type ViewType = 
   // Core Logistics
@@ -43,7 +44,9 @@ export type ViewType =
   // System
   | 'administration'
   | 'governance'
-  | 'about';
+  | 'about'
+  // Special
+  | 'showcase';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
@@ -72,6 +75,7 @@ function AppContent() {
           {currentView === 'administration' && <AdministrationView />}
           {currentView === 'governance' && <GovernanceView />}
           {currentView === 'about' && <AboutView />}
+          {currentView === 'showcase' && <VisualizationShowcase />}
       </main>
     </div>
   );

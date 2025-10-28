@@ -18,7 +18,8 @@ import {
   FileText,
   Info,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Sparkles
 } from 'lucide-react';
 import { ViewType } from '../App';
 import { useState } from 'react';
@@ -45,7 +46,8 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
     'CORE LOGISTICS',
     'PRODUCTION',
     'INTELLIGENCE',
-    'SYSTEM'
+    'SYSTEM',
+    'SHOWCASE'
   ]);
   const { gradientStyleValue } = useTheme();
 
@@ -86,6 +88,12 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
         { id: 'administration', label: 'Administration', icon: Settings },
         { id: 'governance', label: 'Governance', icon: FileText },
         { id: 'about', label: 'About', icon: Info },
+      ],
+    },
+    {
+      title: 'SHOWCASE',
+      items: [
+        { id: 'showcase', label: '✨ Next-Gen Features', icon: Sparkles },
       ],
     },
   ];
