@@ -137,6 +137,8 @@ Comprehensive guides are available in the repository:
 
 - 📘 [**Complete Features Export**](COMPLETE_FEATURES_EXPORT.md) - Full feature reference for LLMs
 - 🚀 [**Deployment & Transfer Guide**](DEPLOYMENT_TRANSFER_GUIDE.md) - How to deploy this app
+- 📚 [**Library Files Setup**](LIBRARY_FILES_SETUP.md) - Utility library documentation
+- ⚡ [**Quick Reference: Utilities**](QUICK_REFERENCE_UTILITIES.md) - One-page cheat sheet
 - 🎌 [**Feature Flags Guide**](FEATURE_FLAGS_GUIDE.md) - Module control and configuration
 - 📊 [**Google Sheets Features**](GOOGLE_SHEETS_FEATURES.md) - Sheets integration details
 - 🎨 [**Dashboard Widgets Guide**](DASHBOARD_WIDGETS_GUIDE.md) - Custom dashboard setup
