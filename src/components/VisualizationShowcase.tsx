@@ -41,7 +41,7 @@ import {
   ComposedChart,
   Line,
   Bar
-} from 'recharts';
+} from './charts';
 
 // Advanced Visualization Data
 const sankeyData = {

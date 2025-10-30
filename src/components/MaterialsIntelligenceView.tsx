@@ -1,6 +1,6 @@
 import { Card } from './ui/card';
 import { BarChart3, DollarSign, Clock, AlertTriangle } from 'lucide-react';
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from './charts';
 
 const costAnalysis = [
   { supplier: 'Global Materials', avgCost: 12.50, leadTime: 14 },

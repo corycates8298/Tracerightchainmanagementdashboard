@@ -1,7 +1,7 @@
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Warehouse, Package, AlertTriangle, TrendingUp } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from './charts';
 
 const warehouseData = [
   { location: 'West Coast', stock: 12450, capacity: 15000, lowStock: 23 },

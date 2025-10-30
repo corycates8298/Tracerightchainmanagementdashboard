@@ -40,7 +40,7 @@ import {
   PieChart,
   Pie,
   Cell
-} from 'recharts';
+} from './charts';
 
 // Sample data
 const revenueData = [

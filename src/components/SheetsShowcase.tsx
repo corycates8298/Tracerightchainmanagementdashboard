@@ -55,7 +55,7 @@ import {
   Treemap,
   FunnelChart,
   Funnel
-} from 'recharts';
+} from './charts';
 
 // Sample Spreadsheet Data
 const spreadsheetData = [

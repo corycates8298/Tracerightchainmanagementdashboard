@@ -26,6 +26,7 @@ import {
 import { ViewType } from '../App';
 import { useState } from 'react';
 import { useTheme } from './ThemeContext';
+import { useFeatureFlags } from './FeatureFlagsContext';
 
 interface NavigationProps {
   currentView: ViewType;
@@ -49,9 +50,34 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
     'PRODUCTION',
     'INTELLIGENCE',
     'SYSTEM',
-    'SHOWCASE'
+    'SHOWCASE',
+    'CONFIGURATION'
   ]);
   const { gradientStyleValue } = useTheme();
+  const { isEnabled } = useFeatureFlags();
+  
+  // Map ViewType to feature flag keys
+  const featureFlagMap: Partial<Record<ViewType, keyof import('./FeatureFlagsContext').FeatureFlags>> = {
+    'logistics': 'logistics',
+    'suppliers': 'suppliers',
+    'purchase-orders': 'purchaseOrders',
+    'inbound-receipts': 'inboundReceipts',
+    'warehouse-ops': 'warehouseOps',
+    'outbound-shipments': 'outboundShipments',
+    'raw-materials': 'rawMaterials',
+    'recipes': 'recipes',
+    'batches': 'batches',
+    'traceability': 'traceability',
+    'ai-reporting': 'aiReporting',
+    'ai-forecasting': 'aiForecast',
+    'materials-intelligence': 'materialsIntel',
+    'ml-intelligence': 'mlIntelligence',
+    'administration': 'administration',
+    'governance': 'governance',
+    'about': 'about',
+    'showcase': 'showcaseVisualization',
+    'sheets-showcase': 'showcaseSheets',
+  };
 
   const navSections: NavSection[] = [
     {
@@ -155,6 +181,12 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
                   {section.items.map((item) => {
                     const Icon = item.icon;
                     const isActive = currentView === item.id;
+                    
+                    // Check if feature is enabled (Configuration items always show)
+                    const featureKey = featureFlagMap[item.id];
+                    const shouldShow = !featureKey || isEnabled(featureKey);
+                    
+                    if (!shouldShow) return null;
                     
                     return (
                       <button

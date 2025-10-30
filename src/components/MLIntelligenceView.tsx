@@ -1,7 +1,7 @@
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Brain, TrendingUp, Activity, Zap } from 'lucide-react';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from './charts';
 
 const accuracyData = [
   { epoch: 1, train: 75, validation: 73 },

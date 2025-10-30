@@ -35,7 +35,7 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   Radar
-} from 'recharts';
+} from './charts';
 
 // Sample data
 const revenueData = [

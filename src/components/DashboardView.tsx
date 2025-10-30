@@ -34,6 +34,7 @@ import { TemplateLibrary } from './TemplateLibrary';
 import { Dashboard3D } from './Dashboard3D';
 import { DashboardCyberpunk } from './DashboardCyberpunk';
 import { useTheme } from './ThemeContext';
+import { useFeature } from './FeatureFlagsContext';
 import { WidgetConfig, WIDGET_COMPONENTS } from './WidgetLibrary';
 import {
   AreaChart,
@@ -48,7 +49,7 @@ import {
   Legend,
   LineChart,
   Line
-} from 'recharts';
+} from './charts';
 
 type LayoutType = 'analyst' | 'executive' | 'warehouse' | 'custom';
 
@@ -128,6 +129,17 @@ export function DashboardView() {
   const [templateLibraryOpen, setTemplateLibraryOpen] = useState(false);
   const [customWidgets, setCustomWidgets] = useState<WidgetConfig[]>([]);
   const { gradientClass, gradientStyleValue, getPrimaryColors, fontClass } = useTheme();
+  
+  // Feature Flags
+  const show3D = useFeature('dashboard3D');
+  const showCyberpunk = useFeature('dashboardCyberpunk');
+  const showAIVision = useFeature('aiVision');
+  const showAIAnalysis = useFeature('aiAnalysis');
+  const showCollaboration = useFeature('collaboration');
+  const showThemeCustomizer = useFeature('themeCustomizer');
+  const showTemplates = useFeature('templateLibrary');
+  const showPivotTables = useFeature('pivotTables');
+  const showDataCleaning = useFeature('dataCleaningTools');
 
   // Load saved widgets from localStorage
   useEffect(() => {
@@ -241,95 +253,115 @@ export function DashboardView() {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
-            <Button
-              onClick={() => setView3D(true)}
-              variant="outline"
-              className="text-violet-600 border-violet-200 hover:bg-violet-50"
-            >
-              <Sparkles className="w-4 h-4 mr-2" />
-              3D View
-            </Button>
-            <Button
-              onClick={() => setViewCyberpunk(true)}
-              variant="outline"
-              className="text-cyan-600 border-cyan-200 hover:bg-cyan-50"
-            >
-              <Sparkles className="w-4 h-4 mr-2" />
-              Cyberpunk
-            </Button>
-            <Button
-              onClick={() => setAIVisionOpen(true)}
-              variant="outline"
-              className="text-blue-600 border-blue-200 hover:bg-blue-50"
-            >
-              <Brain className="w-4 h-4 mr-2" />
-              AI Vision
-            </Button>
-            <Button
-              onClick={() => setAIAnalysisOpen(true)}
-              variant="outline"
-              className="text-violet-600 border-violet-200 hover:bg-violet-50"
-            >
-              <Brain className="w-4 h-4 mr-2" />
-              AI Analysis
-            </Button>
-            <Button
-              onClick={() => setCollaborationOpen(true)}
-              variant="outline"
-            >
-              <Users className="w-4 h-4 mr-2" />
-              Team
-            </Button>
-            <Button
-              onClick={() => setCustomizerOpen(true)}
-              className="text-white hover:opacity-90"
-              style={{ background: gradientStyleValue }}
-            >
-              <Settings className="w-4 h-4 mr-2" />
-              Customize
-            </Button>
+            {show3D && (
+              <Button
+                onClick={() => setView3D(true)}
+                variant="outline"
+                className="text-violet-600 border-violet-200 hover:bg-violet-50"
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+                3D View
+              </Button>
+            )}
+            {showCyberpunk && (
+              <Button
+                onClick={() => setViewCyberpunk(true)}
+                variant="outline"
+                className="text-cyan-600 border-cyan-200 hover:bg-cyan-50"
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+                Cyberpunk
+              </Button>
+            )}
+            {showAIVision && (
+              <Button
+                onClick={() => setAIVisionOpen(true)}
+                variant="outline"
+                className="text-blue-600 border-blue-200 hover:bg-blue-50"
+              >
+                <Brain className="w-4 h-4 mr-2" />
+                AI Vision
+              </Button>
+            )}
+            {showAIAnalysis && (
+              <Button
+                onClick={() => setAIAnalysisOpen(true)}
+                variant="outline"
+                className="text-violet-600 border-violet-200 hover:bg-violet-50"
+              >
+                <Brain className="w-4 h-4 mr-2" />
+                AI Analysis
+              </Button>
+            )}
+            {showCollaboration && (
+              <Button
+                onClick={() => setCollaborationOpen(true)}
+                variant="outline"
+              >
+                <Users className="w-4 h-4 mr-2" />
+                Team
+              </Button>
+            )}
+            {showThemeCustomizer && (
+              <Button
+                onClick={() => setCustomizerOpen(true)}
+                className="text-white hover:opacity-90"
+                style={{ background: gradientStyleValue }}
+              >
+                <Settings className="w-4 h-4 mr-2" />
+                Customize
+              </Button>
+            )}
           </div>
         </div>
       </div>
 
       {/* Quick Actions Bar */}
-      <Card className="p-4 border-slate-200 bg-gradient-to-br from-violet-50 to-purple-50">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Wand2 className="w-5 h-5 text-violet-600" />
-            <div>
-              <div className="text-sm text-violet-900">Advanced Tools</div>
-              <div className="text-xs text-violet-700">Powerful features for data analysis</div>
+      {(showTemplates || showPivotTables || showDataCleaning) && (
+        <Card className="p-4 border-slate-200 bg-gradient-to-br from-violet-50 to-purple-50">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Wand2 className="w-5 h-5 text-violet-600" />
+              <div>
+                <div className="text-sm text-violet-900">Advanced Tools</div>
+                <div className="text-xs text-violet-700">Powerful features for data analysis</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              {showTemplates && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setTemplateLibraryOpen(true)}
+                >
+                  <LayoutTemplate className="w-3 h-3 mr-1" />
+                  Templates
+                </Button>
+              )}
+              {showPivotTables && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setPivotBuilderOpen(true)}
+                >
+                  <Table2 className="w-3 h-3 mr-1" />
+                  Pivot Table
+                </Button>
+              )}
+              {showDataCleaning && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setDataCleaningOpen(true)}
+                >
+                  <Wand2 className="w-3 h-3 mr-1" />
+                  Data Cleaning
+                </Button>
+              )}
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setTemplateLibraryOpen(true)}
-            >
-              <LayoutTemplate className="w-3 h-3 mr-1" />
-              Templates
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setPivotBuilderOpen(true)}
-            >
-              <Table2 className="w-3 h-3 mr-1" />
-              Pivot Table
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setDataCleaningOpen(true)}
-            >
-              <Wand2 className="w-3 h-3 mr-1" />
-              Data Cleaning
-            </Button>
-          </div>
-        </div>
-      </Card>
+        </Card>
+      )}
 
       {/* Layout Description */}
       <Card className="p-4 border-slate-200 bg-gradient-to-br from-slate-50 to-white">

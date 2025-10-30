@@ -1,7 +1,7 @@
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { TrendingUp, Calendar, Target, Sparkles } from 'lucide-react';
-import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from './charts';
 
 const forecastData = [
   { month: 'Jul', actual: 2400, forecast: 2380 },

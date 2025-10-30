@@ -26,7 +26,7 @@ import {
   Legend,
   ResponsiveContainer,
   Rectangle
-} from 'recharts';
+} from './charts';
 
 // Waterfall Chart Component
 export function WaterfallChart({ data, title }: { data: any[]; title: string }) {
