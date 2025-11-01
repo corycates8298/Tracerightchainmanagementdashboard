@@ -136,6 +136,41 @@ export function AboutView() {
           </Button>
         </div>
       </Card>
+
+      {/* Creator Information */}
+      <Card className="p-6 border-slate-200 bg-gradient-to-br from-slate-50 to-violet-50">
+        <div className="text-center">
+          <p className="text-xs text-slate-500 mb-3">Developed by</p>
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+              <span className="text-white font-bold text-sm">T</span>
+            </div>
+            <div className="text-left">
+              <h4 className="text-slate-900 font-semibold">Truvera Solutions Inc</h4>
+              <p className="text-xs text-slate-600">Henderson, Nevada</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-4 text-xs text-slate-600">
+            <a
+              href="https://banodcvd.manus.space"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-violet-600 transition-colors"
+            >
+              banodcvd.manus.space
+            </a>
+            <span className="text-slate-400">•</span>
+            <a
+              href="https://www.linkedin.com/in/coryncates"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-violet-600 transition-colors"
+            >
+              Cory N. Cates
+            </a>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

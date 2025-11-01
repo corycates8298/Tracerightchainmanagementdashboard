@@ -290,6 +290,18 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
             Active & Learning
           </div>
         </div>
+        
+        {/* Creator Credit - Subtle */}
+        <div className="mt-3 text-center">
+          <a
+            href="https://www.linkedin.com/in/coryncates"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-[10px] ${isDarkMode ? 'text-cyan-400/60 hover:text-cyan-400' : 'text-slate-400 hover:text-slate-600'} transition-colors`}
+          >
+            Truvera Solutions Inc
+          </a>
+        </div>
       </div>
     </nav>
   );

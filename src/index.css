@@ -3076,6 +3076,16 @@
     color: var(--color-cyan-400);
   }
 
+  .text-cyan-400\/60 {
+    color: color-mix(in srgb, oklch(.789 .154 211.53) 60%, transparent);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-cyan-400\/60 {
+      color: color-mix(in oklab, var(--color-cyan-400) 60%, transparent);
+    }
+  }
+
   .text-cyan-600 {
     color: var(--color-cyan-600);
   }
@@ -3994,6 +4004,12 @@
   @media (hover: hover) {
     .hover\:text-slate-900:hover {
       color: var(--color-slate-900);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:text-violet-600:hover {
+      color: var(--color-violet-600);
     }
   }
 
