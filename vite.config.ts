@@ -8,6 +8,7 @@
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
+        'sonner@2.0.3': 'sonner',
         'react-hook-form@7.55.0': 'react-hook-form',
         '@': path.resolve(__dirname, './src'),
       },

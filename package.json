@@ -4,6 +4,7 @@
       "version": "0.1.0",
       "private": true,
       "dependencies": {
+          "@faker-js/faker": "*",
           "@radix-ui/react-accordion": "*",
           "@radix-ui/react-alert-dialog": "*",
           "@radix-ui/react-aspect-ratio": "*",
@@ -36,6 +37,7 @@
           "react-hook-form": "^7.55.0",
           "react-resizable-panels": "*",
           "recharts": "*",
+          "sonner": "^2.0.3",
           "tailwind-merge": "*",
           "vaul": "*"
       },

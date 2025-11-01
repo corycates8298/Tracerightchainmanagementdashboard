@@ -34,6 +34,7 @@ import {
   Zap,
   ChevronRight
 } from 'lucide-react';
+import { DataEntrySpreadsheet } from './DataEntrySpreadsheet';
 import {
   ResponsiveContainer,
   BarChart,
@@ -181,10 +182,14 @@ export function SheetsShowcase() {
 
         {/* Main Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-6 mb-8">
+          <TabsList className="grid w-full grid-cols-7 mb-8">
             <TabsTrigger value="spreadsheet">
               <Table2 className="w-4 h-4 mr-2" />
               Spreadsheet
+            </TabsTrigger>
+            <TabsTrigger value="data-entry">
+              <Plus className="w-4 h-4 mr-2" />
+              Data Entry
             </TabsTrigger>
             <TabsTrigger value="ai-analysis">
               <Brain className="w-4 h-4 mr-2" />
@@ -353,6 +358,11 @@ export function SheetsShowcase() {
                 </div>
               </Card>
             </div>
+          </TabsContent>
+
+          {/* DATA ENTRY TAB */}
+          <TabsContent value="data-entry" className="space-y-4">
+            <DataEntrySpreadsheet />
           </TabsContent>
 
           {/* AI ANALYSIS TAB */}
