@@ -9,13 +9,13 @@ import { Navigation } from './components/Navigation';
 const DashboardView = lazy(() => import('./components/DashboardView').then(m => ({ default: m.DashboardView })));
 const LogisticsView = lazy(() => import('./components/LogisticsView').then(m => ({ default: m.LogisticsView })));
 const SuppliersView = lazy(() => import('./components/SuppliersView').then(m => ({ default: m.SuppliersView })));
-const PurchaseOrdersView = lazy(() => import('./components/PurchaseOrdersView').then(m => ({ default: m.PurchaseOrdersView })));
-const InboundReceiptsView = lazy(() => import('./components/InboundReceiptsView').then(m => ({ default: m.InboundReceiptsView })));
-const WarehouseOpsView = lazy(() => import('./components/WarehouseOpsView').then(m => ({ default: m.WarehouseOpsView })));
-const OutboundShipmentsView = lazy(() => import('./components/OutboundShipmentsView').then(m => ({ default: m.OutboundShipmentsView })));
-const RawMaterialsView = lazy(() => import('./components/RawMaterialsView').then(m => ({ default: m.RawMaterialsView })));
-const RecipesView = lazy(() => import('./components/RecipesView').then(m => ({ default: m.RecipesView })));
-const BatchesView = lazy(() => import('./components/BatchesView').then(m => ({ default: m.BatchesView })));
+const PurchaseOrdersView = lazy(() => import('./components/PurchaseOrdersViewEnhanced').then(m => ({ default: m.PurchaseOrdersViewEnhanced })));
+const InboundReceiptsView = lazy(() => import('./components/InboundReceiptsViewEnhanced').then(m => ({ default: m.InboundReceiptsViewEnhanced })));
+const WarehouseOpsView = lazy(() => import('./components/WarehouseOpsViewEnhanced').then(m => ({ default: m.WarehouseOpsViewEnhanced })));
+const OutboundShipmentsView = lazy(() => import('./components/OutboundShipmentsViewEnhanced').then(m => ({ default: m.OutboundShipmentsViewEnhanced })));
+const RawMaterialsView = lazy(() => import('./components/RawMaterialsViewEnhanced').then(m => ({ default: m.RawMaterialsViewEnhanced })));
+const RecipesView = lazy(() => import('./components/RecipesViewEnhanced').then(m => ({ default: m.RecipesViewEnhanced })));
+const BatchesView = lazy(() => import('./components/BatchesViewEnhanced').then(m => ({ default: m.BatchesViewEnhanced })));
 const TraceabilityView = lazy(() => import('./components/TraceabilityView').then(m => ({ default: m.TraceabilityView })));
 const AIReportingView = lazy(() => import('./components/AIReportingView').then(m => ({ default: m.AIReportingView })));
 const AIForecastingView = lazy(() => import('./components/AIForecastingView').then(m => ({ default: m.AIForecastingView })));
@@ -27,6 +27,11 @@ const AboutView = lazy(() => import('./components/AboutView').then(m => ({ defau
 const VisualizationShowcase = lazy(() => import('./components/VisualizationShowcase').then(m => ({ default: m.VisualizationShowcase })));
 const SheetsShowcase = lazy(() => import('./components/SheetsShowcase').then(m => ({ default: m.SheetsShowcase })));
 const FeatureFlagsManager = lazy(() => import('./components/FeatureFlagsManager').then(m => ({ default: m.FeatureFlagsManager })));
+const SupplierCertificationView = lazy(() => import('./components/SupplierCertificationView').then(m => ({ default: m.SupplierCertificationView })));
+const ProvenanceQRView = lazy(() => import('./components/ProvenanceQRView').then(m => ({ default: m.ProvenanceQRView })));
+const UniversalTraceabilityDashboard = lazy(() => import('./components/UniversalTraceabilityDashboard').then(m => ({ default: m.UniversalTraceabilityDashboard })));
+const BarcodeRecoverySystem = lazy(() => import('./components/BarcodeRecoverySystem').then(m => ({ default: m.BarcodeRecoverySystem })));
+const DashboardCyberpunk = lazy(() => import('./components/DashboardCyberpunk').then(m => ({ default: m.DashboardCyberpunk })));
 
 export type ViewType = 
   // Core Logistics
@@ -51,10 +56,16 @@ export type ViewType =
   | 'administration'
   | 'governance'
   | 'about'
+  // Universal Traceability
+  | 'supplier-certifications'
+  | 'provenance-qr'
+  | 'universal-dashboard'
+  | 'barcode-recovery'
   // Special
   | 'showcase'
   | 'sheets-showcase'
-  | 'feature-flags';
+  | 'feature-flags'
+  | 'dark-dashboard';
 
 // Loading component
 function LoadingView() {
@@ -70,7 +81,7 @@ function LoadingView() {
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
-  const { backgroundStyle } = useTheme();
+  const { backgroundStyle, isDarkMode } = useTheme();
 
   return (
     <div className="flex h-screen bg-slate-50">
@@ -79,6 +90,7 @@ function AppContent() {
       <main className="flex-1 overflow-auto" style={backgroundStyle}>
         <Suspense fallback={<LoadingView />}>
           {currentView === 'dashboard' && <DashboardView />}
+          {currentView === 'dark-dashboard' && <DashboardCyberpunk />}
           {currentView === 'logistics' && <LogisticsView />}
           {currentView === 'suppliers' && <SuppliersView />}
           {currentView === 'purchase-orders' && <PurchaseOrdersView />}
@@ -99,6 +111,10 @@ function AppContent() {
           {currentView === 'showcase' && <VisualizationShowcase />}
           {currentView === 'sheets-showcase' && <SheetsShowcase />}
           {currentView === 'feature-flags' && <FeatureFlagsManager />}
+          {currentView === 'supplier-certifications' && <SupplierCertificationView />}
+          {currentView === 'provenance-qr' && <ProvenanceQRView />}
+          {currentView === 'universal-dashboard' && <UniversalTraceabilityDashboard />}
+          {currentView === 'barcode-recovery' && <BarcodeRecoverySystem />}
         </Suspense>
       </main>
     </div>

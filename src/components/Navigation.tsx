@@ -21,12 +21,19 @@ import {
   ChevronRight,
   Sparkles,
   FileSpreadsheet,
-  ToggleLeft
+  ToggleLeft,
+  Moon,
+  Sun,
+  Shield,
+  QrCode,
+  Globe,
+  Barcode
 } from 'lucide-react';
 import { ViewType } from '../App';
 import { useState } from 'react';
 import { useTheme } from './ThemeContext';
 import { useFeatureFlags } from './FeatureFlagsContext';
+import { Button } from './ui/button';
 
 interface NavigationProps {
   currentView: ViewType;
@@ -49,11 +56,13 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
     'CORE LOGISTICS',
     'PRODUCTION',
     'INTELLIGENCE',
+    'UNIVERSAL TRACEABILITY',
     'SYSTEM',
-    'SHOWCASE',
+    'GOOGLE SHEETS',
+    'NEXT-GEN FEATURES',
     'CONFIGURATION'
   ]);
-  const { gradientStyleValue } = useTheme();
+  const { gradientStyleValue, isDarkMode, toggleDarkMode } = useTheme();
   const { isEnabled } = useFeatureFlags();
   
   // Map ViewType to feature flag keys
@@ -75,8 +84,10 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
     'administration': 'administration',
     'governance': 'governance',
     'about': 'about',
-    'showcase': 'showcaseVisualization',
-    'sheets-showcase': 'showcaseSheets',
+    'supplier-certifications': 'suppliers',
+    'provenance-qr': 'traceability',
+    'universal-dashboard': 'dashboardStandard',
+    'barcode-recovery': 'warehouseOps',
   };
 
   const navSections: NavSection[] = [
@@ -111,18 +122,32 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
       ],
     },
     {
+      title: 'UNIVERSAL TRACEABILITY',
+      items: [
+        { id: 'universal-dashboard', label: '🌍 Universal Dashboard', icon: Globe },
+        { id: 'supplier-certifications', label: 'Supplier Certifications', icon: Shield },
+        { id: 'provenance-qr', label: 'QR Provenance', icon: QrCode },
+        { id: 'barcode-recovery', label: 'Barcode Recovery', icon: Barcode },
+      ],
+    },
+    {
+      title: 'GOOGLE SHEETS',
+      items: [
+        { id: 'sheets-showcase', label: '📊 Google Sheets', icon: FileSpreadsheet },
+      ],
+    },
+    {
+      title: 'NEXT-GEN FEATURES',
+      items: [
+        { id: 'showcase', label: '✨ Innovation Lab', icon: Sparkles },
+      ],
+    },
+    {
       title: 'SYSTEM',
       items: [
         { id: 'administration', label: 'Administration', icon: Settings },
         { id: 'governance', label: 'Governance', icon: FileText },
         { id: 'about', label: 'About', icon: Info },
-      ],
-    },
-    {
-      title: 'SHOWCASE',
-      items: [
-        { id: 'showcase', label: '✨ Next-Gen Features', icon: Sparkles },
-        { id: 'sheets-showcase', label: '📊 Google Sheets Demo', icon: FileSpreadsheet },
       ],
     },
     {
@@ -142,8 +167,8 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
   };
 
   return (
-    <nav className="w-64 bg-white border-r border-slate-200 flex flex-col">
-      <div className="p-6 border-b border-slate-200">
+    <nav className={`w-64 border-r flex flex-col ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+      <div className={`p-6 border-b ${isDarkMode ? 'border-cyan-500/30' : 'border-slate-200'}`}>
         <div className="flex items-center gap-3">
           <div 
             className="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -152,10 +177,35 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
             <Search className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-slate-900">TraceRight</h1>
-            <p className="text-xs text-slate-500">AI Supply Chain</p>
+            <h1 className={isDarkMode ? 'text-cyan-400 glow-text-cyan' : 'text-slate-900'}>TraceRight</h1>
+            <p className={`text-xs ${isDarkMode ? 'text-purple-400' : 'text-slate-500'}`}>Universal Trace Cloud</p>
           </div>
         </div>
+      </div>
+
+      {/* Cyberpunk Mode Toggle - PROMINENT! */}
+      <div className={`p-3 border-b ${isDarkMode ? 'border-cyan-500/30' : 'border-slate-200'}`}>
+        <Button
+          onClick={toggleDarkMode}
+          variant="outline"
+          className={`w-full justify-start gap-2 text-base font-medium ${
+            isDarkMode 
+              ? 'bg-gradient-to-r from-cyan-500 to-purple-600 border-cyan-400 text-white hover:from-cyan-600 hover:to-purple-700 shadow-lg shadow-cyan-500/50' 
+              : 'bg-gradient-to-r from-purple-500 to-blue-500 border-purple-400 text-white hover:from-purple-600 hover:to-blue-600 shadow-lg'
+          }`}
+        >
+          {isDarkMode ? (
+            <>
+              <Sun className="w-5 h-5" />
+              Exit Cyberpunk Mode
+            </>
+          ) : (
+            <>
+              <Moon className="w-5 h-5" />
+              🌆 Cyberpunk Mode
+            </>
+          )}
+        </Button>
       </div>
 
       <div className="flex-1 overflow-y-auto p-3 space-y-4">
@@ -166,7 +216,11 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
             <div key={section.title}>
               <button
                 onClick={() => toggleSection(section.title)}
-                className="w-full flex items-center justify-between px-3 py-2 text-xs text-slate-500 hover:text-slate-700 transition-colors"
+                className={`w-full flex items-center justify-between px-3 py-2 text-xs transition-colors ${
+                  isDarkMode 
+                    ? 'text-cyan-400 hover:text-cyan-300' 
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
               >
                 <span>{section.title}</span>
                 {isExpanded ? (
@@ -194,10 +248,18 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
                         onClick={() => onViewChange(item.id)}
                         className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm ${
                           isActive
-                            ? 'text-white shadow-md'
-                            : 'text-slate-600 hover:bg-slate-100'
+                            ? isDarkMode
+                              ? 'text-black shadow-md shadow-cyan-500/50'
+                              : 'text-white shadow-md'
+                            : isDarkMode 
+                              ? 'text-cyan-300 hover:bg-slate-800 hover:text-cyan-400' 
+                              : 'text-slate-600 hover:bg-slate-100'
                         }`}
-                        style={isActive ? { background: gradientStyleValue } : {}}
+                        style={isActive ? { 
+                          background: isDarkMode 
+                            ? 'linear-gradient(to right, #00ffff, #ff00ff)' 
+                            : gradientStyleValue 
+                        } : {}}
                       >
                         <Icon className="w-4 h-4" />
                         <span className="truncate">{item.label}</span>
@@ -211,16 +273,22 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
         })}
       </div>
 
-      <div className="p-4 border-t border-slate-200">
+      <div className={`p-4 border-t ${isDarkMode ? 'border-cyan-500/30' : 'border-slate-200'}`}>
         <div 
-          className="px-3 py-3 rounded-lg"
-          style={{ background: gradientStyleValue }}
+          className={`px-3 py-3 rounded-lg ${isDarkMode ? 'neon-border-cyan' : ''}`}
+          style={{ 
+            background: isDarkMode 
+              ? 'linear-gradient(to right, #00ffff, #ff00ff)' 
+              : gradientStyleValue 
+          }}
         >
           <div className="flex items-center gap-2 mb-2">
             <Brain className="w-4 h-4 text-white" />
             <span className="text-xs text-white">AI Status</span>
           </div>
-          <div className="text-sm text-white">Active & Learning</div>
+          <div className={`text-sm ${isDarkMode ? 'text-black font-bold' : 'text-white'}`}>
+            Active & Learning
+          </div>
         </div>
       </div>
     </nav>

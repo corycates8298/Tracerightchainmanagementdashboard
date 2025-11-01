@@ -128,7 +128,7 @@ export function DashboardView() {
   const [pivotBuilderOpen, setPivotBuilderOpen] = useState(false);
   const [templateLibraryOpen, setTemplateLibraryOpen] = useState(false);
   const [customWidgets, setCustomWidgets] = useState<WidgetConfig[]>([]);
-  const { gradientClass, gradientStyleValue, getPrimaryColors, fontClass } = useTheme();
+  const { gradientClass, gradientStyleValue, getPrimaryColors, fontClass, isDarkMode } = useTheme();
   
   // Feature Flags
   const show3D = useFeature('dashboard3D');
@@ -302,7 +302,7 @@ export function DashboardView() {
                 Team
               </Button>
             )}
-            {showThemeCustomizer && (
+            {showThemeCustomizer && !isDarkMode && (
               <Button
                 onClick={() => setCustomizerOpen(true)}
                 className="text-white hover:opacity-90"

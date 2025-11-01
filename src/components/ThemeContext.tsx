@@ -39,6 +39,9 @@ interface ThemeContextType {
   backgroundStyle: React.CSSProperties;
   getPrimaryColors: () => { from: string; to: string; raw: { from: string; to: string } };
   getAccentColors: () => { from: string; to: string };
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
+  setDarkMode: (enabled: boolean) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -47,6 +50,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [colorPalette, setColorPalette] = useState<ColorPalette>('purple');
   const [gradientStyle, setGradientStyle] = useState<GradientStyle>('linear');
   const [fontStyle, setFontStyle] = useState<FontStyle>('inter');
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    // Load dark mode preference from localStorage
+    const saved = localStorage.getItem('traceright-dark-mode');
+    return saved === 'true';
+  });
   const [gradientControls, setGradientControls] = useState<GradientControls>({
     angle: 90, // default left to right
     startPosition: 0,
@@ -60,6 +68,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     patternType: 'dots',
     patternOpacity: 10,
   });
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(prev => {
+      const newValue = !prev;
+      localStorage.setItem('traceright-dark-mode', String(newValue));
+      return newValue;
+    });
+  };
+
+  const setDarkMode = (enabled: boolean) => {
+    setIsDarkMode(enabled);
+    localStorage.setItem('traceright-dark-mode', String(enabled));
+  };
 
   const updateGradientControl = (key: keyof GradientControls, value: number) => {
     setGradientControls(prev => ({ ...prev, [key]: value }));
@@ -214,9 +235,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         backgroundStyle,
         getPrimaryColors,
         getAccentColors,
+        isDarkMode,
+        toggleDarkMode,
+        setDarkMode,
       }}
     >
-      {children}
+      <div className={isDarkMode ? 'dark' : ''}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 }

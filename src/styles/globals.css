@@ -41,41 +41,60 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Cyberpunk Dark Mode - All Black Background with Neon Accents */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  /* Pure black backgrounds */
+  --background: #000000;
+  --foreground: #00ffff; /* Cyan text */
+  --card: #0a0a0a;
+  --card-foreground: #00ffff;
+  --popover: #0a0a0a;
+  --popover-foreground: #00ffff;
+  
+  /* Neon cyan primary */
+  --primary: #00ffff;
+  --primary-foreground: #000000;
+  
+  /* Dark secondary with purple tint */
+  --secondary: #1a0033;
+  --secondary-foreground: #ff00ff; /* Magenta */
+  
+  /* Muted dark with slight glow */
+  --muted: #0d0d0d;
+  --muted-foreground: #7dd3fc; /* Light cyan */
+  
+  /* Neon purple accent */
+  --accent: #1a0033;
+  --accent-foreground: #ff00ff;
+  
+  /* Neon red destructive */
+  --destructive: #ff0055;
+  --destructive-foreground: #ffffff;
+  
+  /* Neon borders */
+  --border: #00ffff33; /* Transparent cyan */
+  --input: #0a0a0a;
+  --ring: #00ffff;
+  
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  
+  /* Neon chart colors */
+  --chart-1: #00ffff; /* Cyan */
+  --chart-2: #ff00ff; /* Magenta */
+  --chart-3: #00ff00; /* Green */
+  --chart-4: #ffff00; /* Yellow */
+  --chart-5: #ff0055; /* Pink */
+  
+  /* Sidebar with pure black */
+  --sidebar: #000000;
+  --sidebar-foreground: #00ffff;
+  --sidebar-primary: #ff00ff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #1a0033;
+  --sidebar-accent-foreground: #00ffff;
+  --sidebar-border: #00ffff33;
+  --sidebar-ring: #ff00ff;
 }
 
 @theme inline {
@@ -195,4 +214,32 @@ html {
 
 .bg-gradient-conic {
   background-image: conic-gradient(from 0deg, var(--tw-gradient-stops));
+}
+
+/* Cyberpunk glow effects */
+.dark .glow-cyan {
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff40;
+}
+
+.dark .glow-magenta {
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff40;
+}
+
+.dark .glow-text-cyan {
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff80;
+}
+
+.dark .glow-text-magenta {
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff80;
+}
+
+/* Cyberpunk neon borders */
+.dark .neon-border-cyan {
+  border: 1px solid #00ffff;
+  box-shadow: 0 0 5px #00ffff, inset 0 0 5px #00ffff20;
+}
+
+.dark .neon-border-magenta {
+  border: 1px solid #ff00ff;
+  box-shadow: 0 0 5px #ff00ff, inset 0 0 5px #ff00ff20;
 }
